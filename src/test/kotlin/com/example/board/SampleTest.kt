@@ -3,9 +3,9 @@ package com.example.board
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
-class SampleTest: FunSpec ({
+class SampleTest : FunSpec({
 
-    test("sample test"){
+    test("sample test") {
         1 shouldBe 1
     }
 })

@@ -4,8 +4,15 @@ import com.example.board.exception.PostNotDeletableException
 import com.example.board.exception.PostNotFoundException
 import com.example.board.repository.PostRepository
 import com.example.board.service.dto.PostCreateRequestDto
+import com.example.board.service.dto.PostDetailResponseDto
+import com.example.board.service.dto.PostSearchRequestDto
+import com.example.board.service.dto.PostSummaryResponseDto
 import com.example.board.service.dto.PostUpdateRequestDto
+import com.example.board.service.dto.toDetailResponseDto
 import com.example.board.service.dto.toEntity
+import com.example.board.service.dto.toSummaryResponseDto
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -34,5 +41,16 @@ class PostService(
         if (post.createdBy != deletedBy) throw PostNotDeletableException()
         postRepository.delete(post)
         return id
+    }
+
+    fun getPost(id: Long): PostDetailResponseDto {
+        return postRepository.findByIdOrNull(id)?.toDetailResponseDto() ?: throw PostNotFoundException()
+    }
+
+    fun findPageBy(
+        pageRequest: Pageable,
+        postSearchRequestDto: PostSearchRequestDto,
+    ): Page<PostSummaryResponseDto> {
+        return postRepository.findPageBy(pageRequest, postSearchRequestDto).toSummaryResponseDto()
     }
 }

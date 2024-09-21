@@ -1,5 +1,7 @@
 package com.example.board.domain
 
+import com.example.board.exception.CommentNotUpdatableException
+import com.example.board.service.dto.CommentUpdateRequestDto
 import jakarta.persistence.ConstraintMode
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
@@ -16,6 +18,14 @@ class Comment(
     post: Post,
     createdBy: String,
 ) : BaseEntity(createdBy = createdBy) {
+
+    fun update(updateRequestDto: CommentUpdateRequestDto) {
+        if (updateRequestDto.updatedBy != this.createdBy) {
+            throw CommentNotUpdatableException()
+        }
+        this.content = updateRequestDto.content
+        super.updatedBy(updateRequestDto.updatedBy)
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

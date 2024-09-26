@@ -7,9 +7,12 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.Index
 import jakarta.persistence.OneToMany
+import jakarta.persistence.Table
 
 @Entity
+@Table(indexes = [Index(name = "idx_createdBy", columnList = "createdBy")])
 class Post(
     createdBy: String,
     title: String,

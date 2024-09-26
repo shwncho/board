@@ -9,10 +9,13 @@ import jakarta.persistence.ForeignKey
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.Index
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.Table
 
 @Entity
+@Table(indexes = [Index(name = "idx_post_id", columnList = "post.id")])
 class Comment(
     content: String,
     post: Post,

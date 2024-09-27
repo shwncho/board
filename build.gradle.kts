@@ -27,6 +27,9 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+    // redis
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
     // swagger
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
 
@@ -40,7 +43,7 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:5.6.2")
     testImplementation("io.kotest:kotest-assertions-core:5.6.2")
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.3")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:2.0.2")
 }
 
 kotlin {
@@ -51,4 +54,8 @@ kotlin {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.named<Jar>("jar") {
+    enabled = false
 }

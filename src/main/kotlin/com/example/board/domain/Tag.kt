@@ -13,9 +13,11 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 
 @Entity
-@Table(indexes = [
-    Index(name = "idx_post_id", columnList = "post.id"),
-    Index(name = "idx_name", columnList = "name")]
+@Table(
+    indexes = [
+        Index(name = "idx_post_id", columnList = "post.id"),
+        Index(name = "idx_name", columnList = "name")
+    ]
 )
 class Tag(
     name: String,

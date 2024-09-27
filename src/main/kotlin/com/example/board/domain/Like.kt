@@ -13,9 +13,7 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "likes",
-        indexes = [Index(name = "idx_post_id", columnList = "post.id")]
-)
+@Table(name = "likes", indexes = [Index(name = "idx_post_id", columnList = "post.id")])
 class Like(
     post: Post,
     createdBy: String,
